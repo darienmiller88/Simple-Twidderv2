@@ -111,3 +111,38 @@ form{
   margin: auto;
   margin-top: 40px;
 }
+
+.mode-toggle{  
+  position: fixed;
+  top: 20px;
+  right: 20px;
+
+  color: wheat;
+  background-color: var(--twidder-blue);
+  border-radius: 20px;
+
+  width: 40px;
+  height: 20px;
+  padding: 3px 3px;
+
+  .slider{
+    background-color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;    
+  }
+
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+.toggle-left{
+  display: flex;
+  justify-content: start;
+}
+
+.toggle-right{
+  display: flex;
+  justify-content: end;
+}
