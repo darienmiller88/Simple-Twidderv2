@@ -1,9 +1,16 @@
+
+
 .title{
     text-align: center;
-    font-size: 70px;
+    font-size: 45px;
     margin: 10px 0px;
     color: var(--twidder-blue);
+
+    @media only screen and (min-width: 768px){
+      font-size: 70px;
+    }
 }
+
 
 form{
   text-align: center;
@@ -63,7 +70,7 @@ form{
   }
 
   @media only screen and (min-width: 1200px) {
-    width: 50%;
+    width: 70%;
   }
 }
 
@@ -76,12 +83,8 @@ form{
     width: 80%;
   }
 
-  @media only screen and (min-width: 1200px) {
-    // width: 50%;
-  }
-
   .tweed{
-    border: 2px solid white;
+    border: 2px solid var(--twidder-blue);
     border-radius: 10px;
     padding: 5px 10px;
     margin-bottom: 10px;
@@ -94,7 +97,7 @@ form{
 
     .content{
       font-size: 20px;
-      padding: 15px 0px;
+      padding: 25px 0px;
     }
   }
 }
@@ -112,37 +115,4 @@ form{
   margin-top: 40px;
 }
 
-.mode-toggle{  
-  position: fixed;
-  top: 20px;
-  right: 20px;
 
-  color: wheat;
-  background-color: var(--twidder-blue);
-  border-radius: 20px;
-
-  width: 40px;
-  height: 20px;
-  padding: 3px 3px;
-
-  .slider{
-    background-color: white;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;    
-  }
-
-  &:hover{
-    cursor: pointer;
-  }
-}
-
-.toggle-left{
-  display: flex;
-  justify-content: start;
-}
-
-.toggle-right{
-  display: flex;
-  justify-content: end;
-}

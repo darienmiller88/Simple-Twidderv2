@@ -1,5 +1,6 @@
 <script lang="ts">
   import {type Tweed} from "./lib/types"
+  import DarkModeToggle from "./components/DarkModeToggle.svelte";
   import { Moon } from 'svelte-loading-spinners';
   import "./tweed.scss"
 
@@ -39,21 +40,13 @@
   }
 
   function changeColorTheme(){
-    isDarkMode = !isDarkMode
     console.log(isDarkMode)
   }
 </script>
 
 <main>
   <div class="title twidder-color">Twidder</div>
-  <div class={`mode-toggle ${isDarkMode ? "toggle-left" : "toggle-right"}`}>
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div class="slider" on:click={changeColorTheme}>
-
-    </div>
-    <!-- toggle -->
-
-  </div>
+  <DarkModeToggle  />
 
   {#if !isLoading}
     <form on:submit|preventDefault={sendTweed}>
