@@ -40,15 +40,29 @@
   }
 
   function changeColorTheme(){
-    console.log(isDarkMode)
+    isDarkMode = !isDarkMode
+
+    if (!isDarkMode) {
+        document.body.classList.add("light")
+    } else {
+        document.body.classList.remove("light")
+    }
   }
 </script>
 
 <main>
   <div class="title twidder-color">Twidder</div>
-  <DarkModeToggle  />
+  <DarkModeToggle isDarkMode={isDarkMode} changeColorTheme={changeColorTheme} />
 
-  {#if !isLoading}
+  <!-- {#if !isLoading}
+    
+  {/if} -->
+
+  {#if isLoading}
+    <div class="loading">
+      <Moon size="200" color="#1DA1F2" unit="px" duration="0.75s" />
+    </div>
+  {:else}
     <form on:submit|preventDefault={sendTweed}>
       <div class="name-container form-item">
         <label for="name" class="twidder-color">Name</label><br />
@@ -63,15 +77,9 @@
     </form> 
   {/if}
 
-  {#if isLoading}
-    <div class="loading">
-      <Moon size="200" color="#1DA1F2" unit="px" duration="0.75s" />
-    </div>
-  {/if}
-
   <div class="tweeds">
     {#each tweeds as tweed}
-      <div class="tweed">
+      <div class={`tweed ${isDarkMode ? "dark" : "light"}`}>
         <div class="name" id={tweed.date.toString() + tweed.name.at(0)}>{tweed.name}</div>
         <div class="content" id={tweed.date.toString() + tweed.name.at(0)}>{tweed.content}</div>
         <div class="date" id={tweed.date.toString() + tweed.name.at(0)}>{tweed.date.toString()}</div>

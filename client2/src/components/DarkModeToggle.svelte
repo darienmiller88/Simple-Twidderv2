@@ -1,10 +1,6 @@
 <script lang="ts">
-    let isDarkMode: boolean = true
-
-    function changeColorTheme(){
-        isDarkMode = !isDarkMode
-        document.body.style.backgroundColor = isDarkMode ? "black" : "white"
-    }
+    export let isDarkMode: boolean
+    export let changeColorTheme = () => {}
 </script>
 
 <main>
@@ -16,9 +12,9 @@
 </main>
 
 <style lang="scss">
-    $toggle-width: 55px;
+    $toggle-width: 45px;
     $padding:      5px;
-    $slider-width: 20px;
+    $slider-width: 15px;
 
     .mode-toggle{  
         display: flex;
