@@ -1,5 +1,6 @@
 export interface Tweed{
+    id: string
     name: string
     content: string
-    date: Date
+    created_at: Date
 }

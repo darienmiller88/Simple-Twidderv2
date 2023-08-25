@@ -1,42 +1,53 @@
 <script lang="ts">
   import {type Tweed} from "./lib/types"
   import DarkModeToggle from "./components/DarkModeToggle.svelte";
+  import axios, { type AxiosResponse } from 'axios';
+
   import { Moon } from 'svelte-loading-spinners';
   import "./tweed.scss"
+  import { onMount } from "svelte";
 
   let isDarkMode:   boolean = true
-  let isLoading:    boolean = false
+  let isLoading:    boolean = true
   let name:         string = ""
   let tweedContent: string = ""
-  let tweeds:       Tweed[] = [
-    {
-      name: "Darien",
-      content: "First tweed",
-      date: new Date()
-    },
-    {
-      name: "Dalton",
-      content: "dreads",
-      date: new Date()
-    },
-    {
-      name: "Vicky",
-      content: "spam!",
-      date: new Date()
-    }
-  ]
+  let URL         : string = window.location.hostname == "localhost" ? "http://localhost:8080/api/v1/tweeds" : "https://twidderapi.fly.dev/api/v1/tweeds"
+  let tweeds:       Tweed[] = []
 
-  function sendTweed(){
+  onMount(() => getTweeds())
+
+  async function sendTweed(){
     let tweed: Tweed = {
+      id: "",
       name: name,
       content: tweedContent,
-      date: new Date()
+      created_at: new Date()
     }
 
-    tweeds = [...tweeds, tweed]
+    try {
+      const tweedResponse: Tweed = await axios.post(URL, tweed)
+
+      isLoading = true
+      console.log(tweedResponse)
+      tweeds = [tweed, ...tweeds]
+      isLoading = false
+    } catch (error) {
+      console.log("err:", error)
+    }
+
     name = ""
     tweedContent = ""
-    isLoading = !isLoading
+  }
+
+  async function getTweeds(){
+    try {
+        const response: AxiosResponse<Tweed[]>  = await axios.get(URL)
+        
+        tweeds = response.data.reverse()
+        isLoading = false
+      } catch (error) {
+        console.log("err;", error)
+      }
   }
 
   function changeColorTheme(){
@@ -54,38 +65,35 @@
   <div class="title twidder-color">Twidder</div>
   <DarkModeToggle isDarkMode={isDarkMode} changeColorTheme={changeColorTheme} />
 
-  <!-- {#if !isLoading}
-    
-  {/if} -->
+  <form on:submit|preventDefault={sendTweed}>
+    <div class="name-container form-item">
+      <label for="name" class="twidder-color">Name</label><br />
+      <input placeholder="Enter name" bind:value={name} />
+    </div>
+    <br />
+    <div class="text-container form-item">
+      <label for="tweed" class="twidder-color">Tweed</label><br />
+      <textarea placeholder="Enter tweed" rows="5" bind:value={tweedContent} />
+    </div>
+    <button>Send Tweed!</button>
+  </form> 
 
   {#if isLoading}
     <div class="loading">
       <Moon size="200" color="#1DA1F2" unit="px" duration="0.75s" />
     </div>
   {:else}
-    <form on:submit|preventDefault={sendTweed}>
-      <div class="name-container form-item">
-        <label for="name" class="twidder-color">Name</label><br />
-        <input placeholder="Enter name" bind:value={name} />
-      </div>
-      <br />
-      <div class="text-container form-item">
-        <label for="tweed" class="twidder-color">Tweed</label><br />
-        <textarea placeholder="Enter tweed" rows="5" bind:value={tweedContent} />
-      </div>
-      <button>Send Tweed!</button>
-    </form> 
+    <div class="tweeds">
+      {#each tweeds as tweed}
+        <div class={`tweed ${isDarkMode ? "dark" : "light"}`} id={tweed.id}>
+          <div class="name"   >{tweed.name}</div>
+          <div class="content">{tweed.content}</div>
+          <div class="date"   >{tweed.created_at.toString()}</div>
+        </div>
+      {/each}
+    </div>
   {/if}
 
-  <div class="tweeds">
-    {#each tweeds as tweed}
-      <div class={`tweed ${isDarkMode ? "dark" : "light"}`}>
-        <div class="name" id={tweed.date.toString() + tweed.name.at(0)}>{tweed.name}</div>
-        <div class="content" id={tweed.date.toString() + tweed.name.at(0)}>{tweed.content}</div>
-        <div class="date" id={tweed.date.toString() + tweed.name.at(0)}>{tweed.date.toString()}</div>
-      </div>
-    {/each}
-  </div>
 </main>
 
 <style lang="scss">
