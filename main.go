@@ -30,6 +30,10 @@ func main(){
 
 	tweedController.Init()
 	app.Mount("/api/v1/tweeds", tweedController.Router)
+
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.JSON(fiber.Map{"message": "hello world"})
+	})
 	
 	app.Listen(fmt.Sprintf(":%s", os.Getenv("PORT")))
 }
