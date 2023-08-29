@@ -103,7 +103,7 @@ func (t *TweedController) GetTweeds(c *fiber.Ctx) error{
 		return c.Status(http.StatusInternalServerError).JSON(err)
 	}
 
-	return c.Status(http.StatusOK).JSON(tweeds[len(tweeds) - 10:])
+	return c.Status(http.StatusOK).JSON(tweeds)
 }
 
 func (t *TweedController) PostTweed(c *fiber.Ctx) error{
