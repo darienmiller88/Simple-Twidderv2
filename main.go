@@ -24,6 +24,7 @@ func main(){
 	app := fiber.New()
 	err := mgm.SetDefaultConfig(nil, "UserTweeds", options.Client().ApplyURI(os.Getenv("MONGO_URI")))
 	tweedController := controllers.TweedController{}
+	requests := 30
 
 	if err != nil{
 		log.Fatal(err)
@@ -32,11 +33,11 @@ func main(){
 	app.Use(cors.New())
 	app.Use(logger.New())
 	app.Use(limiter.New(limiter.Config{
-		Max:            30,
+		Max:            requests,
 		Expiration:     24 * time.Hour,
 		LimitReached: func(c *fiber.Ctx) error {
 			return c.Status(http.StatusBadRequest).JSON(fiber.Map{
-				"message": "You reached your limit of 20 tweeds per day. Come back tomorrow!",
+				"message": fmt.Sprintf("You reached your limit of %d tweeds per day. Come back tomorrow!", requests),
 			})
 		},
 	}))

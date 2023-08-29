@@ -37,7 +37,7 @@
 
   onMount(() => getTweeds())
 
-  window.onscroll = function() {
+  window.onscroll = () => {
     isAtBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight
   }
 
