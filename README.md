@@ -18,8 +18,8 @@
 ### Requirements
 * Clone the repository using `git clone https://github.com/darienmiller88/Simple-Twidderv2`
 * Migrate the necessary information to your local `.env` as described in the `.env_sample` file
-* Run `go build` to create a root level `Messenger.exe` file, and then run `.\Messenger` to run the executable. If an executable is not needed, simply input `go run main.go` instead, or `.\fresh` to enable a server restart on change.
-* `cd` into the `client` folder, and run `npm start` to the react server, which should be on port 3000
+* Run `go build` to create a root level `Simple-Twidderv2.exe` file, and then run `.\Simple-Twidderv2` to run the executable. If an executable is not needed, simply input `go run main.go` instead, or `.\fresh` to enable a server restart on change.
+* `cd` into the `client2` folder, and run `npm start` to the Vite server, which should be on port 5173
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
