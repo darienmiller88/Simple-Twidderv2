@@ -129,3 +129,14 @@ form{
   font-size: 20px;
   text-align: center;
 }
+
+.rate-limit-error{
+  background-color: rgb(170, 50, 40);
+  color: white;
+
+  border-radius: 5px;
+  padding: 20px;
+  width: 70%;
+  margin: auto;
+  margin-top: 20px;
+}

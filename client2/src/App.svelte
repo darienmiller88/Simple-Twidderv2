@@ -12,10 +12,15 @@
   let name:          string = ""
   let tweedContent:  string = ""
   let tweeds:        Tweed[] = []
+
   let isAtBottom:    boolean = false
   let finished:      boolean = false
   let skip:          number = 0
   let limit:         number = 5
+
+  let isRateLimited:  boolean = false
+  let rateLimitError: string = "Stop sending so much fucking tweeds!" 
+
   let URL:           string = window.location.hostname == "localhost" ? "http://localhost:8080/api/v1/tweeds" : "https://twidderapi.fly.dev/api/v1/tweeds"
   $:  if(isAtBottom && !finished){
         (async () => {
@@ -52,6 +57,7 @@
       tweeds = [tweed, ...tweeds]
       isLoading = false
     } catch (error) {
+      error.message
       console.log("err:", error)
     }
 
@@ -98,6 +104,12 @@
     </div>
     <button>Send Tweed!</button>
   </form> 
+
+  {#if isRateLimited}
+    <div class="rate-limit-error">
+      {rateLimitError}
+    </div>
+  {/if}
 
   {#if isLoading}
     <div class="loading">

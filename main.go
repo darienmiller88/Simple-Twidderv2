@@ -32,7 +32,7 @@ func main(){
 	app.Use(cors.New())
 	app.Use(logger.New())
 	app.Use(limiter.New(limiter.Config{
-		Max:            2000,
+		Max:            30,
 		Expiration:     24 * time.Hour,
 		LimitReached: func(c *fiber.Ctx) error {
 			return c.Status(http.StatusBadRequest).JSON(fiber.Map{
