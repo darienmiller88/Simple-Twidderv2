@@ -94,8 +94,8 @@
   <div class="title twidder-color">Twidder</div>
 
   <DarkModeToggle isDarkMode={isDarkMode} changeColorTheme={changeColorTheme} />
-  <Alarm fill="red" width={32} height={32}/>
-  <Bank fill="red" width={32} height={32} />
+  <Alarm fill="red" width={32} height={32} stroke={"3"}/>
+  <Bank fill="red" width={32} height={32}  />
   <CloudMoon fill="red" width={32} height={32}/>
 
   <form on:submit|preventDefault={sendTweed}>

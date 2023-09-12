@@ -1,12 +1,10 @@
 <script lang="ts">
-      import { IconHeart } from '@tabler/icons-svelte';
 
     export let isDarkMode: boolean
     export let changeColorTheme = () => {}
 </script>
 
 <main>
-    <IconHeart size={48} stroke={1} />
 
     <button class={`mode-toggle ${isDarkMode ? "" : "toggle-right"}`} on:click={changeColorTheme}>
         <div class="slider">
