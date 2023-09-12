@@ -1,5 +1,4 @@
 <script lang="ts">
-
     export let isDarkMode: boolean
     export let changeColorTheme = () => {}
 </script>
