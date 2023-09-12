@@ -3,6 +3,7 @@
   import DarkModeToggle from "./components/DarkModeToggle.svelte";
   import axios, { type AxiosResponse } from 'axios';
   // import { IconHeart } from '@tabler/icons-svelte';
+  import { Alarm, Bank, CloudMoon } from "svelte-bootstrap-icons";
 
   import { Moon } from 'svelte-loading-spinners';
   import "./tweed.scss"
@@ -93,6 +94,9 @@
   <div class="title twidder-color">Twidder</div>
 
   <DarkModeToggle isDarkMode={isDarkMode} changeColorTheme={changeColorTheme} />
+  <Alarm fill="red" width={32} height={32}/>
+  <Bank fill="red" width={32} height={32} />
+  <CloudMoon fill="red" width={32} height={32}/>
 
   <form on:submit|preventDefault={sendTweed}>
     <div class="name-container form-item">
