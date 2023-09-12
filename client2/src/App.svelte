@@ -2,6 +2,7 @@
   import {type Tweed} from "./lib/types"
   import DarkModeToggle from "./components/DarkModeToggle.svelte";
   import axios, { type AxiosResponse } from 'axios';
+  // import { IconHeart } from '@tabler/icons-svelte';
 
   import { Moon } from 'svelte-loading-spinners';
   import "./tweed.scss"
@@ -90,6 +91,7 @@
 
 <main>
   <div class="title twidder-color">Twidder</div>
+
   <DarkModeToggle isDarkMode={isDarkMode} changeColorTheme={changeColorTheme} />
 
   <form on:submit|preventDefault={sendTweed}>
